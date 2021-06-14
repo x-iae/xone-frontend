@@ -24,16 +24,10 @@ jobs:
         npm test
         npm run build
 
-    - name: Publish tag to npm
-      if: contains(github.ref, 'tags')
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-
     - uses: actions/setup-node@v1
       with:
         registry-url: 'https://npm.pkg.github.com'
-      
+
     - name: Publish tag to GPR
       run: npm publish
       env:

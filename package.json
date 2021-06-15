@@ -1,10 +1,7 @@
 {
   "name": "@x-iae/xone-frontend",
   "version": "1.0.0",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/x-iae/xone-frontend.git"
-  },
+  "repository": "github:x-iae/xone-frontend",
   "publishConfig": {
     "registry":"https://npm.pkg.github.com/x-iae"
   },

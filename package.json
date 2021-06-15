@@ -1,6 +1,10 @@
 {
-  "name": "vue3-component-library",
-  "version": "0.0.6",
+  "name": "xone-frontend",
+  "version": "1.0.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/x-iae/xone-frontend.git"
+  },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "unpkg": "dist/vuelib.min.js",

@@ -1,12 +1,12 @@
 {
-  "name": "xone-frontend",
+  "name": "@x-iae/xone-frontend",
   "version": "1.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/x-iae/xone-frontend.git"
   },
   "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
+    "registry":"https://npm.pkg.github.com/x-iae"
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

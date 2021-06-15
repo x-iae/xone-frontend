@@ -20,13 +20,7 @@
     "*.css",
     "*.scss"
   ],
-  "config": {
-    "commitizen": {
-      "path": "git-cz"
-    }
-  },
   "scripts": {
-    "cz": "git-cz",
     "serve": "vue-cli-service serve",
     "lint": "vue-cli-service lint",
     "build:types": "tsc --build tsconfigtypes.json",

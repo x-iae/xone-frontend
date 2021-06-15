@@ -28,7 +28,8 @@ jobs:
 #        npm test
 
     - name: build package
-        npm run build:es
+       run: |
+         npm run build:es
 
     - uses: actions/setup-node@v1
       with:

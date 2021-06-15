@@ -19,17 +19,9 @@ jobs:
 
     - name: Install npm dependencies
       run: npm ci
-#
-#    - name: Lint code
-#      run: npm run lint
-#
-#    - name: Test and build package
-#      run: |
-#        npm test
 
     - name: build package
-      run: |
-        npm run build:es
+      run:  npm run build:es
 
     - uses: actions/setup-node@v1
       with:

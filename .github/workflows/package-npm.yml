@@ -3,32 +3,30 @@
 
 name: npm publish
 on:
-  push:
+  release:
+    types: [created]
     tags: v*.*.*
-
 jobs:
-  npm:
+  build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-    - uses: actions/checkout@master
-
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '16.x'
-        registry-url: 'https://registry.npmjs.org'
-
-    - name: Install npm dependencies
-      run: npm ci
-
-    - name: build package
-      run:  npm run build:es
-
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '16.x'
-        registry-url: 'https://npm.pkg.github.com'
-      
-    - name: Publish tag to GPR
-      run: npm publish
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
+      - uses: actions/checkout@v2
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm install
+      # Setup .npmrc file to publish to GitHub Packages
+      - uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+          # Defaults to the user or organization that owns the workflow file
+          scope: '@x-iae'
+      # Publish to GitHub Packages
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -14,7 +14,6 @@
   "types": "types/index.d.ts",
   "files": [
     "dist",
-    "src",
     "types/*.d.ts"
   ],
   "sideEffects": [

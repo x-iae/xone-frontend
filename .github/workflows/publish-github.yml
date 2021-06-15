@@ -1,38 +1,35 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
+name: build package
 on:
-  release:
-    types: [created]
+  push:
+    tags: v*.*.*
+
 jobs:
-  build:
+  npm:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
-      - name: Checkout master branch
-      - uses: actions/checkout@master
-      - name: Aetting up regisrty to registry.npmjs.org
-      # Setup .npmrc file to publish to npm
+      - uses: actions/checkout@main
+
       - uses: actions/setup-node@v1
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
+
       - name: Install npm dependencies
-      - run: npm install
-      - name: Build project
-      - run: npm run build:es
-      # Setup .npmrc file to publish to GitHub Packages
-      - name: Setting up regisrty to npm.pkg.github.com and scope to @x-iae
-      - uses: actions/setup-node@v2
+        run: npm ci
+
+      - name: build package
+        run: |
+          npm run build:es
+
+      - uses: actions/setup-node@v1
         with:
           node-version: '16.x'
           registry-url: 'https://npm.pkg.github.com'
-          # Defaults to the user or organization that owns the workflow file
-          scope: '@x-iae'
-      # Publish to GitHub Packages
-      - name: Publish release to GPR
-      - run: npm publish
+
+      - name: Publish tag to GPR
+        run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GH_AUTH_TOKEN }}
